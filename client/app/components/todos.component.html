@@ -13,11 +13,13 @@
 			<input type="checkbox" name="" [checked]="todo.isCompleted" (click)="updateStatus(todo)">
 		</div>
 		<div class="col-md-7">
-			{{todo.text}}
+			<span [class.hidden]="todo.isEditMode">{{todo.text}}</span>
+			<input type="text" name="" [class.hidden]="!todo.isEditMode" [value]="todo.text" (keypress)="updateTodoText($event, todo)">
+			<input type="button" name="" [class.hidden]="!todo.isEditMode" value="Cancel" (click)="setEditState(todo, false)" class="btn btn-warning">
 		</div>
 		<div class="col-md-4">
 			<input type="button" name="" class="btn btn-danger pull-right" value="Delete">
-			<input type="button" name="" class="btn btn-default pull-right" value="Edit">
+			<input [class.disabled]="todo.isCompleted" (click)="setEditState(todo, true)" type="button" name="" class="btn btn-default pull-right" value="Edit">
 		</div>
 	</div>
 </div>
